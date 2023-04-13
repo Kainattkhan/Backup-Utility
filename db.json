@@ -1,0 +1,41 @@
+{
+  "signup": [
+    {
+      "userId": "123456",
+      "Password": "qwertyuiop",
+      "confirmPassword": "qwertyuiop",
+      "id": 11
+    },
+    {
+      "userId": "987654",
+      "Password": "susaan",
+      "confirmPassword": "susaan",
+      "id": 12
+    },
+    {
+      "userId": "456456",
+      "Password": "asdfgh",
+      "confirmPassword": "asdfgh",
+      "id": 13
+    },
+    {
+      "userId": "11111",
+      "Password": "russia",
+      "confirmPassword": "russia",
+      "id": 14
+    },
+    {
+      "userId": "22222",
+      "Password": "uiuiui",
+      "confirmPassword": "uiuiui",
+      "id": 15
+    },
+    
+    {
+      "userId": "1234",
+      "Password": "asdfghjk",
+      "confirmPassword": "asdfghjk",
+      "id": 19
+    }
+  ]
+}

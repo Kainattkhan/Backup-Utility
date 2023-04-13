@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="container mt-3">
+  <div class="card">
+    <h2 class="card-header text-center"><b>Select Database</b></h2>
+    <div class="form-group">
+      <div class="radio-container">
+        <label>
+          <input type="radio" name="option" value="option1" (click)="onOptionSelected('option1')">
+          <span class="radio-label">MongoDB</span>
+        </label>
+        <label>
+          <input type="radio" name="option" value="option2" (click)="onOptionSelected('option2')">
+          <span class="radio-label">MySQL</span>
+        </label>
+      </div>
+    </div>
+    
+    <div *ngIf="selectedOption">
+      <ul class="option-list">
+        <li *ngFor="let option of options">
+          <label>
+            <input type="checkbox" name="selectedOptions" [value]="option" (change)="onOptionChange($event)">
+            <span class="checkbox-label">{{ option }}</span>
+          </label>
+        </li>
+      </ul>
+      <button class="btn btn-dark" (click)="showResults()">Backup</button>
+    </div>
+    
+    <div *ngIf="results.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>File name</th>
+            <th>Date/Time</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of results">
+            <td>{{ result.option }}</td>
+            <td>{{ result.result }}</td>
+            <td>{{ result.download }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

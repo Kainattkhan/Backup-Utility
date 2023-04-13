@@ -1,0 +1,29 @@
+ .navbar-brand
+  {
+    margin: 0 auto;
+  }
+
+  ul {
+    margin:auto;
+    padding: 20px
+    
+  }
+   
+  li a {
+   
+    color: white;
+    margin: 10px;
+    font-size:16px;
+    cursor: pointer;
+  }
+  
+  li a:hover:not(.active) {
+    background-color:white;
+    color: black;
+  }
+  
+  li a.active {
+    color: white;
+    background-color: #04AA6D;
+  } 
+ 

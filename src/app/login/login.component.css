@@ -1,0 +1,76 @@
+/* .card {
+  align-content: center;
+  box-shadow: 5px 5px 5px #ebe7e7;
+  padding: 40px;
+  font-family: sans-serif;
+  background: rgb(214, 213, 213);
+  border: none;
+  position: relative;
+  width: 80%;
+  top: 40px;
+  left:50%;
+} */
+/* .card input{
+  border-radius: none;
+} */
+.box2
+{
+  border-right:1px solid white;
+  background-image: url('/assets/1.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+ background-size: contain;
+ background-color: #03174b;
+
+}
+.box
+  {
+   
+      align-content: center;
+      box-shadow: 5px 5px 5px #ebe7e7;
+      padding:20px;
+      font-family: sans-serif;
+      background: #03174b;
+      border: none;
+      border-radius: none;
+      /* position: relative;
+      width: 80%;
+      top: 40px; */
+     
+      /* scroll-behavior: unset; */
+      /* text-align: center; */
+      /* border: 1px solid grey; */
+    }
+
+a {
+  margin-left: 20px;
+  margin-top: 40px;
+  color: white;
+}
+.box h2,.box2 h2{
+  color: white;
+  font-size: 24px;
+}
+label{
+  color: white;
+}
+/* button.btn.btn-primary
+{
+  border: 1px solid white;
+  text-align: center;
+} */
+button {
+  background-color: #03174b;
+  border-radius: 0px;
+  margin-top: 20px;
+  height: 40px;
+  width: 50%;
+  font-size: 20px;
+  color: white;  
+  border:1px solid rgb(255, 255, 255);
+  text-align: center;
+ }
+ #error
+ {
+  color: red;
+ }

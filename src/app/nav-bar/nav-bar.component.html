@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text-light" routerLink="/login">Backup Utility</a>
+    <button class="navbar-toggler" type="button" (click)="navbar()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'show':navOpen}">
+        <ul class="navbar-nav mr-auto" style="display: flex;">
+          <li class="nav-item"><a class="navbar-brand"  routerLink="/takebackup">TakeBackup</a></li>
+          <li class="nav-item"><a class="navbar-brand"  routerLink="/viewbackup">ViewBackup</a></li>
+          <li class="nav-item"><a class="navbar-brand"  routerLink="/restorebackup">RestoreBackup</a></li>
+          <li class="nav-item ml-auto"><a class="navbar-brand" (click)="authService.logout()">logout</a></li>
+        </ul>
+
+    </div>
+  </nav>

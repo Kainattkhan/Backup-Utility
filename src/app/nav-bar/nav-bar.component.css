@@ -2,6 +2,9 @@
   {
     margin: 0 auto;
   }
+  .navbar {
+    background-color: rgb(3, 8, 79);
+  }
 
   ul {
     margin:auto;
@@ -9,14 +12,13 @@
     
   }
    
-  li a {
+   li a {
    
     color: white;
     margin: 10px;
     font-size:16px;
     cursor: pointer;
   }
-  
   li a:hover:not(.active) {
     background-color:white;
     color: black;

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from '../auth-service.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,10 +23,12 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private toastr: ToastrService,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
  
   login() {
     console.log(this.login_form.value);
@@ -38,15 +41,8 @@ export class LoginComponent implements OnInit {
           ); 
         });
         if (user) {
-          this.authService.login(user.Role);
-          const userRole = this.authService.getUserRole();
-
-          if (userRole === 'admin') {
-            this.router.navigate(['/home']);
-          } else {
-            this.router.navigate(['/user']);
-          }
-         this.toastr.success('login successfully')
+          this.router.navigate(['/home']);
+          this.toastr.success('login successfully')
         } else {
           this.toastr.error('Invalid username or password');
         }
@@ -55,14 +51,16 @@ export class LoginComponent implements OnInit {
       alert('something went wrong');
     }
   );
-}
-get userId() {
-  return this.login_form.get('userId');
-}
-get Password() {
-  return this.login_form.get('Password');
-}
+  }
 
+  get userId() {
+    return this.login_form.get('userId');
+  }
+  
+  get Password() {
+    return this.login_form.get('Password');
+  }
+  
 }
 
 

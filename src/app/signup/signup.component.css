@@ -1,65 +1,59 @@
-/* .card
-{
-  
-   align-content: center;
-   position: relative;
-   width: 80%;
-   top: 40px;
-   left:50%;
-   padding: 40px;
-   font-family: sans-serif;
-   background: rgb(214, 213, 213);
-   border: none;
-   font-family: sans-serif;
-   font-weight: 400;
-
-} */
-#error {
-    font-size: 14px;
-    color: red;
-    
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./bg.PNG');
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.8;
   }
-input[type="text" ]
-{
-    border-radius: none !important;
-}
-.card
+
+  .card
   {
-   
-      align-content: center;
-      box-shadow: 5px 5px 5px #ebe7e7;
-      padding:20px;
+      align-items: center;
+      padding:40px;
       color: white;
-      font-family: sans-serif;
-      background: #03174b;
-      border: none;
-      position: relative;
+      font-family: 'Times New Roman';
+      background: #020d3d;
       width: 80%;
-      top: 40px;
-      left:50%;
-      /* text-align: center; */
-      border: 1px solid grey;
-    }
-.card h2{
-    text-align: center;
-}
-a{
-    margin-left: 5px;
-    margin-top: 50px;
-    font-size:12px;
-    color:white;
-}
-.form-group
-{
-    margin-top: 10px;
-}
-select#inlineFormCustomSelect {
-    margin-top: 10px;
-    margin-left: 5px;
-    padding: 5px;
-}
-button {
-    background-color: #03174b;
+      top: 50px;
+      margin: 0 auto; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center;
+    } 
+
+    .card form {
+        padding: 20px;
+        width: 100%;
+      }
+
+      .card label{
+        color: white;
+        font-size: 24px;
+      }
+
+      .card input {
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+      }
+
+        #error {
+        font-size: 14px;
+        color: red;
+      }
+
+        a {
+            margin-left: 5px;
+            margin-top: 40px;
+            color: white;
+        } 
+
+    button {
+    background-color: #3e5285;
     border-radius: 0px;
     margin-top: 20px;
     height: 40px;
@@ -68,7 +62,13 @@ button {
     color: white;  
     border:1px solid rgb(255, 255, 255);
     text-align: center;
+    cursor: pointer;
    }
+   h2 {
+    color: white;
+    font-size: 30px;
+    font-family: 'Times New Roman';
+  }
  
   
   

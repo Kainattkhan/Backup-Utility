@@ -8,6 +8,7 @@ import { AuthServiceService } from '../auth-service.service';
   styleUrls: ['./takebackup.component.css']
 })
 export class TakebackupComponent implements OnInit {
+  
   selectedOption: string;
   options: string[];
   selectedOptions: string[];
@@ -17,7 +18,7 @@ export class TakebackupComponent implements OnInit {
   }
 
   constructor(private http: HttpClient, public authService:AuthServiceService) {
-    this.options = ['Document', 'Notes', 'Employees Data', 'Staff data', 'Office Details'];
+    this.options = ['Document', 'Notes', 'Employees Data', 'Staff data', 'Office Details', 'mongo', ''];
     this.selectedOptions = [];
     this.results = [];
   }
@@ -52,17 +53,6 @@ export class TakebackupComponent implements OnInit {
   
   }
 
-
-  // getDataFromBackendsql() {
-  //   this.http.get('url-to-backend-api-sql').subscribe((data) => {
-  //     this.dropdownData = data;
-  //   });
-  // }
-  // getDataFromBackendmongo() {
-  //   this.http.get('url-to-backend-api-mongo').subscribe((data) => {
-  //     this.dropdownData = data;
-  //   });
-  // }
 
 }
 

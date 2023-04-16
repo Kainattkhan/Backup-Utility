@@ -1,32 +1,44 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="container">
-  <div class="form">
-    <label for="Date" class="label">Restore Backup</label>
-    <select id="Date" [(ngModel)]="selectedDate" class="select">
-      <option value="">Select Date</option>
-      <option *ngFor="let item of data" [value]="item.date">{{ item.date }}</option>
-    </select>
-    <button class="btn" (click)="populateTable()">Show Data</button>
+
+<div class="container mt-3">
+  <div class="card">
+    <h2 class="card-header text-center"><b>Select Database</b></h2>
+    <div class="form-group">
+      <div class="radio-container">
+        <label>
+          <input type="radio" name="radioBtn" [(ngModel)]="selectedOption" value="MongoDB" (click)="showCalendarIcon()">
+          <span class="radio-label">MongoDB</span>
+        </label>
+        <label>
+          <input type="radio" name="radioBtn" [(ngModel)]="selectedOption" value="MySQL" (click)="showCalendarIcon()">
+          <span class="radio-label">MySQL</span>
+        </label>
+        
+      </div>
+      <div *ngIf="showIcon">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <ul>
+        <button class="btn btn-dark" (click)="showCalendarIcon()">Load</button>
+        <!-- <img src={{image.message}}/> -->
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
-<div class="container">
-  <div class="table-container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>File Name</th>
-          <th>Date</th>
-          <th>Download</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of filteredData">
-          <td>{{ item.fileName }}</td>
-          <td>{{ item.date }}</td>
-          <td><a href="{{ item.downloadLink }}" target="_blank">Download</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+
+
+
+
+
+  
+
+
+
+
+

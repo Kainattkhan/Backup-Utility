@@ -12,12 +12,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // isAdmin(): boolean {
-  //   return this.authService.getUserRole() === 'admin';
-  // }
-  // isAuthenticatedUser(): boolean {
-  //   return this.authService.isAuthenticatedUser();
-  // }
-  
+
 
 }

@@ -18,21 +18,22 @@
     
     <div *ngIf="selectedOption">
       <ul class="option-list">
-        <li *ngFor="let option of options">
-          <label>
-            <input type="checkbox" name="selectedOptions" [value]="option" (change)="onOptionChange($event)">
-            <span class="checkbox-label">{{ option }}</span>
-          </label>
-        </li>
+      <mat-form-field>
+      <mat-label>Select Databases</mat-label>
+      <mat-select multiple [(ngModel)]="selectedOptions">
+        <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+      </mat-form-field> 
       </ul>
       <button class="btn btn-dark" (click)="showResults()">Backup</button>
     </div>
+
     
     <div *ngIf="results.length > 0">
       <table class="table">
         <thead>
           <tr>
-            <th>File name</th>
+            <th>File Name</th>
             <th>Date/Time</th>
             <th>Download</th>
           </tr>
@@ -48,3 +49,4 @@
     </div>
   </div>
 </div>
+

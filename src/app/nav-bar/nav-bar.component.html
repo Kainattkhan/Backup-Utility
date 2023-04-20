@@ -10,9 +10,25 @@
           <li class="nav-item"><a class="navbar-brand"  routerLink="/restorebackup">RestoreBackup</a></li>
         </ul>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item "><a  (click)="authService.logout()">logout</a></li>
+            <li class="nav-item "><a (click)="authService.logout()">logout</a></li>
           </ul>
       
         
     </div>
 </nav>
+
+<!-- <nav>
+  <ul >
+ <li class="nav-button"> <a href="/home">Backup-Utility</a></li>
+</ul>
+  <div class="container">
+  <ul>
+    <li><a href="/takebackup">Take Backup</a></li>
+    <li><a href="/viewbackup">View Backup</a></li>
+    <li><a href="/restorebackup">Restore Backup</a></li>
+  </ul>
+</div>
+  <ul>
+  <li class="nav-button"><a (click)="authService.logout()">Logout</a></li>
+  </ul>
+</nav> -->

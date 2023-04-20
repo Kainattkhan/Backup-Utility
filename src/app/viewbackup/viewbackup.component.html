@@ -1,29 +1,35 @@
+<div class="background">
 <app-nav-bar></app-nav-bar>
 
-<form>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 offset-md-3">
-          <div class="card mt-5">
-            <h4 class="card-header text-center">ViewBackup</h4>
-            <div class="card-body bg-light p-4">
-              <div class="form-group">
-                <div class="container">
-                  <div class="form-check form-check-inline">
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date">
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <button type="submit">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</form>
+<div class="container">
+  <div class="form">
+    <label for="Date" class="label">View Backup</label>
+    <input type="date" [(ngModel)]="selectedDate" class="select">
+    <button class="btn" *ngIf="selectedDate" (click)="populateTable()">View Backup</button>
+  
+
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr  *ngFor="let item of filteredData">
+          <th>File Name</th>
+          <th>Date</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td>{{ item.fileName }}</td>
+          <td>{{ item.date }}</td>
+          <td><a href="{{ item.downloadLink }}" target="_blank">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+
 
 
 

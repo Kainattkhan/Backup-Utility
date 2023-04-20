@@ -1,3 +1,5 @@
+
+<div class="background">
 <app-nav-bar></app-nav-bar>
 
 <div class="container mt-3">
@@ -6,22 +8,21 @@
     <div class="form-group">
       <div class="radio-container">
         <label>
-          <input type="radio" name="option" value="option1" (click)="onOptionSelected('option1')">
+          <input type="radio" name="option" value="option1" (click)="getDataFromBackendmongo('option1')"/>
           <span class="radio-label">MongoDB</span>
         </label>
         <label>
-          <input type="radio" name="option" value="option2" (click)="onOptionSelected('option2')">
+          <input type="radio" name="option" value="option2" (click)="getDataFromBackendsql('option2')"/>
           <span class="radio-label">MySQL</span>
         </label>
       </div>
     </div>
-    
     <div *ngIf="selectedOption">
       <ul class="option-list">
       <mat-form-field>
       <mat-label>Select Databases</mat-label>
       <mat-select multiple [(ngModel)]="selectedOptions">
-        <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+        <mat-option *ngFor="let option of dropdownData" [value]="option">{{ option }}</mat-option>
       </mat-select>
       </mat-form-field> 
       </ul>
@@ -42,11 +43,13 @@
           <tr *ngFor="let result of results">
             <td>{{ result.option }}</td>
             <td>{{ result.result }}</td>
-            <td>{{ result.download }}</td>
+            <!-- <td>{{ result.download }}</td> -->
+            <td><a href="{{ result.downloadLink }}" target="_blank">Download</a></td><br><br>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+</div>
 </div>
 

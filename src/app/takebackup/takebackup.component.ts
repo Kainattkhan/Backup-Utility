@@ -12,20 +12,22 @@ export class TakebackupComponent implements OnInit {
   selectedOption: string;
   options: string[];
   selectedOptions: string[];
-  results: { option: string, result: string, download:string }[];
+  results: any;
+  dropdownData:string[];
 
-  ngOnInit(): any {
-  }
+
 
   constructor(private http: HttpClient, public authService:AuthServiceService) {
-    this.options = ['Document', 'Notes', 'Employees Data', 'Staff data', 'Office Details', 'mongo', ''];
+    // this.options = ['Document', 'Notes', 'Employees Data', 'Staff data', 'Office Details', 'mongo', ''];
     this.selectedOptions = [];
     this.results = [];
+    
   }
   //to keep track of which radio is selected
   //When a radio button is clicked, it triggers the (click) event 
   onOptionSelected(option: string) {
     this.selectedOption = option;
+    
   }
 
   //when an option is selected or deselected by user
@@ -41,19 +43,36 @@ export class TakebackupComponent implements OnInit {
   }
 
   showResults() {
-    // Here, you can make a call to your database to fetch the results based on the selected options.
-    // For this example, we'll just create some dummy results.
-    this.results = this.selectedOptions.map(option => {
+    this.results = this.selectedOptions.map(dropdownData => {
       return {
-        option: option,
-        result: `Result for ${option}`,
-        download:option
+        option: dropdownData,
+        result: `Result for ${dropdownData}`,
+        downloadLink: this.selectedOption === "option1"?`http://localhost:8080/mongo/zip/${dropdownData}`:"http://localhost:8080/sql/createzip/student"
       }
     });
   
   }
-
-
+  getDataFromBackendsql(option: string) {
+    this.results  = [];
+    this.dropdownData = [];
+    this.selectedOption = option;
+    this.http.get('http://localhost:8080/sql/alldatabases').subscribe((data) => {
+      if (data) {      
+         this.dropdownData = Object.values(data);
+         console.log(this.dropdownData)
+      }
+    });
+  }
+  getDataFromBackendmongo(option: string) {
+    this.results  = [];
+    this.selectedOption = option;
+    this.dropdownData = [];
+    this.http.get('http://localhost:8080/mongo/showAll').subscribe((data) => {
+      if (data) {
+        this.dropdownData = Object.values(data);
+      }
+});
+  }
+  ngOnInit(): any {
+  }
 }
-
-

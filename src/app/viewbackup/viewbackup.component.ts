@@ -1,60 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from '../auth-service.service';
-
+import { HttpClient } from '@angular/common/http';
+ 
 @Component({
   selector: 'app-viewbackup',
   templateUrl: './viewbackup.component.html',
   styleUrls: ['./viewbackup.component.css']
 })
+
 export class ViewbackupComponent implements OnInit {
-  constructor(public authService:AuthServiceService) { }
-
-  ngOnInit(): void {
-  }
-
-  data: any[] = [
-    {
-      fileName: 'document1.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document2.pdf',
-      date: '2022-04-01',
-      downloadLink: 'https://example.com/document2.pdf'
-    },
-    {
-      fileName: 'document3.xlsx',
-      date: '2023-03-20',
-      downloadLink: 'https://example.com/document3.xlsx'
-    },
-    {
-      fileName: 'document4.pptx',
-      date: '2022-03-20',
-      downloadLink: 'https://example.com/document4.pptx'
-    },
-    {
-      fileName: 'document5.txt',
-      date: '2022-04-12',
-      downloadLink: 'https://example.com/document5.txt'
-    },
-    {
-      fileName: 'document6.zip',
-      date: '2022-04-12',
-      downloadLink: 'https://example.com/document6.zip'
-    }
-  ];
-
-  selectedDate: string = '';
-
+  selectedOption: string;
+  selectedDate: '';
   filteredData: any[] = [];
 
-  populateTable() {
-    if (this.selectedDate === '') {
-      this.filteredData = this.data;
-    } else {
-      this.filteredData = this.data.filter(item => item.date === this.selectedDate);
-    }
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}-${day}-${year}`;
+  }
+  
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {}
+
+  viewbackupmongo(option: string) {
+    this.selectedOption = option;
+    this.selectedDate = '';
+    this.filteredData = [];
+
   }
 
+  viewbackupsql(option: string) {
+    this.selectedOption = option;
+    this.selectedDate = '';
+    this.filteredData = [];
+  
+  }
+  populateTable() {
+    if (this.selectedOption === 'option1') {
+      this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+        this.filteredData = Object.entries(data).map(([key, value]) => {
+          return {
+            name: key,
+            contents: value
+          };
+        });
+      });
+    } else if (this.selectedOption === 'option2') {
+      this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+        this.filteredData = Object.entries(data).map(([key, value]) => {
+          return {
+            name: key,
+            contents: value
+          };
+        });
+      });
+    }
+  }
+  
 }
+

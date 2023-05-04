@@ -1,6 +1,6 @@
  .navbar-brand
   {
-    margin: 0 auto;
+    margin: auto;
   }
   .navbar {
     background-color: rgb(3, 8, 79);
@@ -24,62 +24,7 @@
     color: black;
   }
   
-  li a.active {
+  /* li a.active {
     color: white;
     background-color: #04AA6D;
-  } 
-
-  
-  /* nav {
-    background-color: #333;
-    color: #fff;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    
-  
-  }
-  
-  nav ul {
-    font-family: Monospace;
-    list-style: none;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    
-  }
-  
-  nav li {
-    margin: 0 10px;
-    margin:auto;
-    padding: 10px
-    
-  }
-  
-  nav li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-  
-  }
-  
-  li a:hover:not(.active) {
-    background-color:white;
-    color: black;
-  }
-  
-  li a.active {
-    color: white;
-    background-color: #04AA6D;
-  }
-  
-  .nav-button {
-  
-  font-family: Fantasy;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-  } */
+  }  */

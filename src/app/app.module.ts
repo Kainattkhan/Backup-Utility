@@ -25,6 +25,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
 import {MatNativeDateModule} from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+// import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     TakebackupComponent,
     ViewbackupComponent,
     RestorebackupComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,8 +59,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatTableModule,
     MatDatepickerModule,
     NgbModule,
+    // BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

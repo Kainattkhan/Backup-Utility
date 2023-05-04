@@ -1,6 +1,83 @@
+// import { Component, OnInit } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+
+// @Component({
+//   selector: 'app-restorebackup',
+//   templateUrl: './restorebackup.component.html',
+//   styleUrls: ['./restorebackup.component.css']
+// })
+// export class RestorebackupComponent implements OnInit {
+//   selectedOption: string;
+//   selectedDate: '';
+//   filteredData: any[] = [];
+//   selectAllChecked = false;
+//   tableRendered: boolean = false;
+//   dataShow:any;
+
+//   formatDate(date: Date): string {
+//     const year = date.getFullYear();
+//     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+//     const day = date.getDate().toString().padStart(2, '0');
+//     return `${month}-${day}-${year}`;
+//   }
+
+//   ngOnInit(): any {
+//   }
+//   constructor(private http: HttpClient) {}
+
+//   selectAll() {
+//     for (let item of this.filteredData) {
+//       item.selected = !item.selected;
+//     }
+//   }
+
+//   onOptionSelected(option: string) {
+//     this.selectedOption = option;
+//   }
+//   populateTable() {
+//     if (this.selectedOption === 'option1') {
+//       this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+//         this.filteredData = Object.entries(data).map(([key, value]) => {
+//           return {
+//             name: key,
+//             contents: value
+//           };
+//         });
+//       });
+//     } else if (this.selectedOption === 'option2') {
+//       this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+//         this.filteredData = Object.entries(data).map(([key, value]) => {
+//           return {
+//             name: key,
+//             contents: value
+//           };
+//         });
+//       });
+//     }
+//   }
+  
+//   sqlData(option: string){
+//     this.filteredData = [];
+//     this.selectedDate=''
+//     this.tableRendered = false;  
+//     this.selectedOption = option;
+// }
+
+//   mongoData(option:string){
+//     this.filteredData = [];
+//     this.selectedDate=''
+//     this.tableRendered = false;  
+//     this.selectedOption = option;
+// } 
+
+// }
+
+
+
+
+
 import { Component, OnInit } from '@angular/core';
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
-import { AuthServiceService } from '../auth-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-restorebackup',
@@ -9,104 +86,88 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class RestorebackupComponent implements OnInit {
   selectedOption: string;
-  results: any;
-  selectedDate: string;
+  selectedDate: '';
   filteredData: any[] = [];
-
-  ngOnInit(): any {
-  }
-  constructor(public authService:AuthServiceService) {
-    this.selectedDate='';
-    this.results = [];
-  }
-
-  data: any[] = [
-    {
-      fileName: 'document1.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document2.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document3.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document4.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document5.docx',
-      date: '2023-03-31',
-      downloadLink: 'https://example.com/document1.docx'
-    },
-    {
-      fileName: 'document2.pdf',
-      date: '2022-04-01',
-      downloadLink: 'https://example.com/document2.pdf'
-    },
-    {
-      fileName: 'document3.xlsx',
-      date: '2023-03-20',
-      downloadLink: 'https://example.com/document3.xlsx'
-    },
-    {
-      fileName: 'document4.pptx',
-      date: '2022-03-20',
-      downloadLink: 'https://example.com/document4.pptx'
-    },
-    {
-      fileName: 'document5.txt',
-      date: '2022-04-12',
-      downloadLink: 'https://example.com/document5.txt'
-    },
-    {
-      fileName: 'document6.zip',
-      date: '2022-04-12',
-      downloadLink: 'https://example.com/document6.zip'
-    }
-  ];
-
   selectAllChecked = false;
+  tableRendered: boolean = false;
+  dataShow:any;
 
-  // toggleSelectAll() {
-  //   this.data.forEach(item => item.selected = this.selectAllChecked);
-  // }
 
-  toggleSelectAll() {
-    this.filteredData.forEach(item => item.selected = this.selectAllChecked);
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}-${day}-${year}`;
   }
 
- //to keep track of which radio is selected
-  //When a radio button is clicked, it triggers the (click) event
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+  }
+
+  selectAll() {
+    for (let item of this.filteredData) {
+      item.selected = !item.selected;
+    }
+  }
+
   onOptionSelected(option: string) {
     this.selectedOption = option;
   }
 
+  // downloadFile(downloadLink: string): void {
+  //   this.http.get(downloadLink, { responseType: 'blob' }).subscribe(blob => {
+  //     const a = document.createElement('a');
+  //     const objectUrl = URL.createObjectURL(blob);
+  //     a.href = objectUrl;
+  //     a.download = downloadLink.substr(downloadLink.lastIndexOf('/') + 1);
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     URL.revokeObjectURL(objectUrl);
+  //   });
+  // }
+
   populateTable() {
-    this.results=this.selectedDate;
-    this.filteredData = this.data.filter(item => item.date === this.selectedDate);
-    
+    if (this.selectedOption === 'option1') {
+      this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+        this.filteredData = Object.entries(data).map(([key, value]) => {
+          return {
+            name: key,
+            contents: value,
+            downloadLink: `http://localhost:8080/mongo/zip/${key}`
+          };
+        });
+      });
+    } else if (this.selectedOption === 'option2') {
+      this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+        this.filteredData = Object.entries(data).map(([key, value]) => {
+          return {
+            name: key,
+            contents: value,
+            downloadLink: `http://localhost:8080/sql/createzip/${key}`
+          };
+        });
+      });
+    }
   }
 
   sqlData(option: string){
-    this.results=[]
-    this.filteredData=[]
+    this.filteredData = [];
     this.selectedDate=''
+    this.tableRendered = false;  
     this.selectedOption = option;
-}
+  }
 
   mongoData(option:string){
-    this.results=[]
-    this.filteredData=[]
+    this.filteredData = [];
     this.selectedDate=''
+    this.tableRendered = false;  
     this.selectedOption = option;
-} 
-
+  } 
 }
+
+
+
+

@@ -1,6 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-takebackup',
@@ -14,11 +14,9 @@ export class TakebackupComponent implements OnInit {
   selectedOptions: string[];
   results: any;
   dropdownData:string[];
+  dataBackup:any;
 
-
-
-  constructor(private http: HttpClient, public authService:AuthServiceService) {
-    // this.options = ['Document', 'Notes', 'Employees Data', 'Staff data', 'Office Details', 'mongo', ''];
+  constructor(private http: HttpClient) {
     this.selectedOptions = [];
     this.results = [];
     
@@ -43,15 +41,27 @@ export class TakebackupComponent implements OnInit {
   }
 
   showResults() {
-    this.results = this.selectedOptions.map(dropdownData => {
+    let val;
+  if(this.selectedOption==="option1"){
+    val="mongo/backup";
+      
+  } else{
+    val="sql/getbackup";
+  }
+  this.http.get(`http://localhost:8080/${val}/${this.selectedOptions}`).subscribe((data) => {
+    if (data) {   
+      this.dataBackup = data;
+    this.results = this.dataBackup.map((dropdownData: any) => {
       return {
-        option: dropdownData,
-        result: `Result for ${dropdownData}`,
-        downloadLink: this.selectedOption === "option1"?`http://localhost:8080/mongo/zip/${dropdownData}`:"http://localhost:8080/sql/createzip/student"
+        option: this.selectedOption === "option1"?dropdownData.Database:dropdownData.database,
+        result: dropdownData.Date,
+        downloadLink: this.selectedOption === "option1"?`http://localhost:8080/mongo/zip/${dropdownData.Database}`:`http://localhost:8080/sql/createzip/${dropdownData.database}`
       }
     });
-  
+    }
+  });
   }
+
   getDataFromBackendsql(option: string) {
     this.results  = [];
     this.dropdownData = [];
@@ -63,6 +73,7 @@ export class TakebackupComponent implements OnInit {
       }
     });
   }
+
   getDataFromBackendmongo(option: string) {
     this.results  = [];
     this.selectedOption = option;
@@ -72,6 +83,7 @@ export class TakebackupComponent implements OnInit {
         this.dropdownData = Object.values(data);
       }
 });
+
   }
   ngOnInit(): any {
   }

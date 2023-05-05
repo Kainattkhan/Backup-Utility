@@ -36,6 +36,8 @@ export class ViewbackupComponent implements OnInit {
     this.filteredData = [];
   
   }
+
+  //HTTP request to either mongo or sql depending on the value of selectedOption
   populateTable() {
     if (this.selectedOption === 'option1') {
       this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {

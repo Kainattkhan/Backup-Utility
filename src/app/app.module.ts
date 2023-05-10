@@ -20,8 +20,6 @@ import { TakebackupComponent } from './takebackup/takebackup.component';
 import { ViewbackupComponent } from './viewbackup/viewbackup.component';
 import { RestorebackupComponent } from './restorebackup/restorebackup.component';
 import { SettingComponent } from './setting/setting.component';
-import { MongoComponent } from './mongo/mongo.component';
-import { MysqlComponent } from './mysql/mysql.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -47,9 +45,6 @@ import { RouterModule } from '@angular/router';
     ViewbackupComponent,
     RestorebackupComponent,
     SettingComponent,
-    MongoComponent,
-    MysqlComponent,
-
   ],
   imports: [
     BrowserModule,

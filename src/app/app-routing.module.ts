@@ -8,8 +8,7 @@ import {TakebackupComponent} from './takebackup/takebackup.component';
 import { ViewbackupComponent } from './viewbackup/viewbackup.component';
 import { RestorebackupComponent } from './restorebackup/restorebackup.component';
 import { SettingComponent } from './setting/setting.component';
-import { MongoComponent } from './mongo/mongo.component';
-import { MysqlComponent } from './mysql/mysql.component';
+
 
 const routes: Routes = [
   {path:'login', component:LoginComponent},
@@ -18,8 +17,7 @@ const routes: Routes = [
   {path:'viewbackup', component:ViewbackupComponent},
   {path:'restorebackup', component:RestorebackupComponent},
   {path:'setting', component:SettingComponent},
-  {path:'mysql', component:MysqlComponent},
-  {path:'mongo', component:MongoComponent},
+
 
   {path:'home', component:HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },

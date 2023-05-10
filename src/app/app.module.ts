@@ -19,6 +19,9 @@ import { HomeComponent } from './home/home.component';
 import { TakebackupComponent } from './takebackup/takebackup.component';
 import { ViewbackupComponent } from './viewbackup/viewbackup.component';
 import { RestorebackupComponent } from './restorebackup/restorebackup.component';
+import { SettingComponent } from './setting/setting.component';
+import { MongoComponent } from './mongo/mongo.component';
+import { MysqlComponent } from './mysql/mysql.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +29,10 @@ import {MatInputModule} from '@angular/material/input';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
+
+
 // import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
@@ -39,6 +46,9 @@ import { DatePipe } from '@angular/common';
     TakebackupComponent,
     ViewbackupComponent,
     RestorebackupComponent,
+    SettingComponent,
+    MongoComponent,
+    MysqlComponent,
 
   ],
   imports: [
@@ -59,6 +69,8 @@ import { DatePipe } from '@angular/common';
     MatTableModule,
     MatDatepickerModule,
     NgbModule,
+    MatTabsModule,
+    RouterModule
     // BsDatepickerModule.forRoot()
   ],
   providers: [DatePipe],

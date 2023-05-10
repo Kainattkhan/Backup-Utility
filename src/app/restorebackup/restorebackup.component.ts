@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-restorebackup',
@@ -23,34 +24,13 @@ export class RestorebackupComponent implements OnInit {
     return `${month}-${day}-${year}`;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit(): void {
   }
 
-  onOptionSelected(option: string) {
-    this.selectedOption = option;
-  }
-
-  sqlData(option: string){
-    this.filteredData = [];
-    this.selectedDate=''
-    this.tableRendered = false;  
-    this.selectedOption = option;
-  }
-
-  mongoData(option:string){
-    this.filteredData = [];
-    this.selectedDate=''
-    this.tableRendered = false;  
-    this.selectedOption = option;
-  } 
-
   selectAll() {
-    //checks wheather the selected property is true on each item or not
     const allSelected = this.filteredData.every(item => item.selected);
-    
-    //assigns negation to the selected property of each item (if items are checked, it will uncheck and viceversa)
     this.filteredData.forEach(item => item.selected = !allSelected);
 
     if (allSelected) {
@@ -62,8 +42,8 @@ export class RestorebackupComponent implements OnInit {
     }
   }
 
-  updateSelectedItems() {
-    this.checkedoptions = this.filteredData.filter(item => item.selected);
+  onOptionSelected(option: string) {
+    this.selectedOption = option;
   }
 
   populateTable() {
@@ -77,6 +57,7 @@ export class RestorebackupComponent implements OnInit {
           };
         });
       });
+      //contents = value.split(',');
     } else if (this.selectedOption === 'option2') {
       this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
         this.filteredData = Object.entries(data).map(([key,value]) => {
@@ -89,6 +70,26 @@ export class RestorebackupComponent implements OnInit {
       });
     }
   }
+  
+  sqlData(option: string){
+    this.filteredData = [];
+    this.selectedDate=''
+    this.tableRendered = false;  
+    this.selectedOption = option;
+  }
+
+  mongoData(option:string){
+    this.filteredData = [];
+    this.selectedDate=''
+    this.tableRendered = false;  
+    this.selectedOption = option;
+  } 
+  updateSelectedItems() {
+    this.checkedoptions = this.filteredData.filter(item => item.selected);
+
+
+  }
+
 
   restoreData(){
     this.checkedoptions.forEach(date => {
@@ -125,12 +126,12 @@ export class RestorebackupComponent implements OnInit {
         }
       });
   }
+    }
+    
+
+   
+    
      
-}
-
-
-
-
 
 
 

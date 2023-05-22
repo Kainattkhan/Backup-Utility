@@ -8,13 +8,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./restorebackup.component.css']
 })
 export class RestorebackupComponent implements OnInit {
+
   selectedOption: string;
   selectedDate: '';
   filteredData: any[] = [];
   selectAllChecked = false;
   tableRendered: boolean = false;
   dataShow:any;
-  checkedoptions: any[] = [];
+  checkedoption: any[] = [];
 
 
   formatDate(date: Date): string {
@@ -29,42 +30,32 @@ export class RestorebackupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectAll() {
-    const allSelected = this.filteredData.every(item => item.selected);
-    this.filteredData.forEach(item => item.selected = !allSelected);
-
-    if (allSelected) {
-      // If "select all" is unchecked, clear the checkedoptions array
-      this.checkedoptions = [];
-    } else {
-      // If "select all" is checked, add all items to the checkedoptions array
-      this.checkedoptions = [...this.filteredData];
-    }
-  }
-
   onOptionSelected(option: string) {
     this.selectedOption = option;
   }
 
   populateTable() {
     if (this.selectedOption === 'option1') {
-      this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+      //Replace"http://192.168.1.58:8080/mongo/showBackup" with your own API
+      this.http.get(`http://192.168.1.62:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
         this.filteredData = Object.entries(data).map(([key, value]) => {
           return {
             name: key,
             contents: value,
-            downloadLink: `http://localhost:8080/mongo/zip/${key}/${value}`
+            //Replace with your own API
+            downloadLink: `http://192.168.1.58:8080/mongo/zip/${key}`
           };
         });
       });
-      //contents = value.split(',');
     } else if (this.selectedOption === 'option2') {
-      this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+      //Replace this "http://192.168.1.58:8080/sql/showBackupFiles" with your API
+      this.http.get(`http://192.168.1.62:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
         this.filteredData = Object.entries(data).map(([key,value]) => {
           return {
             name: key,
             contents: value,
-            downloadLink: `http://localhost:8080/sql/createzip/${key}`
+            //Replace with your own API
+            downloadLink: `http://192.168.1.62:8080/sql/createzip/${key}`
           };
         });
       });
@@ -85,26 +76,23 @@ export class RestorebackupComponent implements OnInit {
     this.selectedOption = option;
   } 
   updateSelectedItems() {
-    this.checkedoptions = this.filteredData.filter(item => item.selected);
-
-
+    this.checkedoption = this.filteredData.filter(item => item.selected);
   }
-
-
   restoreData(){
-    this.checkedoptions.forEach(date => {
+    this.checkedoption.forEach(date => {
       if (date.selected) {
         if(this.selectedOption === "option1")
           date.contents.forEach((type:string) =>{
-            this.http.get(`http://localhost:8080/mongo/restore/${date.name}/${type}`).subscribe(
+            //Repalce with your own API
+            this.http.get(`http://192.168.1.62:8080/mongo/restore/${date.name}/${type}`).subscribe(
               (response) => {
-                const result= 
-                // handle success
                 console.log(response);
+                this.toastr.success("Restored Successfully!")
               },
               (error) => {
-                // handle error
+                
                 console.log(error);
+                this.toastr.error("Unable to restore!")
               }
             );
           })
@@ -112,21 +100,23 @@ export class RestorebackupComponent implements OnInit {
           if(this.selectedOption === "option2")
 
           date.contents.forEach((type:string) =>{
-            this.http.get(`http://localhost:8080/sql/restore/${date.name}/${type}`).subscribe(
+            //Replace with your own API
+            this.http.get(`http://192.168.1.62:8080/sql/restore/${date.name}/${type}`).subscribe(
               (response) => {
-                // handle success
                 console.log(response);
+                this.toastr.success("Restored Successfully!")
               },
               (error) => {
-                // handle error
                 console.log(error);
+                this.toastr.error("Unable to restore!")
               }
             );
           })
         }
       });
   }
-    }
+  
+}
     
 
    

@@ -27,7 +27,12 @@
         </ul>
         <button class="btn btn-dark" (click)="showResults()">Backup</button>
       </div>
-  
+      <div *ngIf="backupInProgress">
+        <p>Backup in progress...</p>
+      </div>
+      <div *ngIf="backupInProgress" class="spinner-border" role="status">
+        <span class="sr-only loader"></span>
+      </div>
       
       <div *ngIf="results.length > 0">
         <table class="table">
@@ -42,7 +47,7 @@
             <tr *ngFor="let result of results">
               <td>{{ result.option }}</td>
               <td>{{ result.result }}</td>
-              <td><a href="{{ result.downloadLink }}" target="_blank">Download</a></td><br><br>
+              <td><a href="{{ result.downloadLink }}">Download</a></td><br><br>
             </tr>
           </tbody>
         </table>

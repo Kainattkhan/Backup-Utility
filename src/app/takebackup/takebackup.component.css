@@ -9,6 +9,7 @@
   background-size: cover;
   background-position: center center;
   opacity: 1;
+  overflow: auto;
 }
 .card {
   border: 1px solid #ccc;

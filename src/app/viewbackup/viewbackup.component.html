@@ -37,7 +37,8 @@
       <thead>
         <tr>
           <th>Backup Date</th>
-          <th>File Names</th>
+          <th>Content</th>
+          <th>Download</th>
         </tr>
       </thead>
       <tbody>
@@ -45,9 +46,10 @@
           <td>{{ item.name }}</td>
           <td>
             <ul>
-              <li *ngFor="let content of item.contents">{{ content }}</li>
+            <li *ngFor="let content of item.contents">{{ content }}</li>
             </ul>
           </td>
+          <td><a href="{{ item.downloadLink }}" target="_blank">Download</a></td>
         </tr>
       </tbody>
     </table>

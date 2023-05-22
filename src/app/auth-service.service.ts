@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ɵangular_packages_platform_browser_platform_browser_n } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,10 +20,6 @@ export class AuthServiceService {
 
   toggleRadios() {
     this.showRadios = !this.showRadios;
-  }
-  getData() {
-    // Replace the URL with the actual endpoint to fetch the data
-    return this.http.get('http://example.com/data');
   }
  
   getIsAuthenticated(): boolean {

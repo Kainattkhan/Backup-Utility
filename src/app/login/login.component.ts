@@ -11,6 +11,8 @@ import { AuthServiceService } from '../auth-service.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
+
+
 export class LoginComponent implements OnInit {
 
   login_form = new FormGroup({
@@ -32,9 +34,8 @@ export class LoginComponent implements OnInit {
  
   login() {
     console.log(this.login_form.value);
-    this.http.get<any>('http://localhost:3000/signup').subscribe(
-      (Response) => {
-        const user = Response.find((a: any) => {
+    this.http.get<any>('http://localhost:3000/signup').subscribe((response) => {
+        const user = response.find((a: any) => {
           return (
             a.userId === this.login_form.value.userId &&
             a.confirmPassword === this.login_form.value.Password
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
         }
     },
     (error: any) => {
-      alert('something went wrong');
+      alert('Error While logging In! Retry!');
     }
   );
   }

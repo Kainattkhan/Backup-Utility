@@ -1,79 +1,99 @@
+
 <div class="background">
   <app-nav-bar></app-nav-bar>
-  <ul>
-    <li>
-      <button class="navbar-brand button" (click)="showMongo()">Mongo Database</button>
-    </li>
-    <li>
-      <button class="navbar-brand button" (click)="showMySQL()">MySQL Database</button>
-    </li>
-  </ul>
-  
+    <ul>
+      <li>
+        <button class="navbar-brand button1" (click)="showMongo()">Mongo Database</button>
+      </li>
+      <li>
+        <button class="navbar-brand button1" (click)="showMySQL()">MySQL Database</button>
+      </li>
+    </ul>
+    
   <div *ngIf="showMongoForm">
     <div class="container mt-5 mx-auto d-flex justify-content-center align-items-center">
       <div class="row">
         <div class="col-md-6">
-          <div class="card box" >
+          <div class="card box">
             <div class="card-body">
-              <h2 class="card-title text-center">Mongo Data</h2> 
-              <!-- <form [formGroup]="mongo" (ngSubmit)="mongo()"> -->
-                <form action="(ng submit)">
-                <div class="form-group">
-                  <label for="userId">User Id</label>
-                  <input type="text" class="form-control" id="userId" formControlName="userId" placeholder="Enter Id">
-                  <!-- <span id="error" *ngIf="userId && userId.invalid && userId.touched">*Invalid user id<br /></span> -->
+              <h2 class="card-title text-center">Mongo Data</h2>
+              <form (ngSubmit)="handleSaveMongo()">
+                <div>
+                  <label for="username">User Name</label>
+                  <input type="text" [(ngModel)]="username" name="username" placeholder="Username">
                 </div><br>
-                <div class="form-group">
+                <div>
                   <label for="password">Password</label>
-                  <input type="password" class="form-control " id="password" formControlName="Password" placeholder="Enter password" autocomplete="on">
-                  <!-- <span id="error" *ngIf="Password && Password.invalid && Password.touched">*add password</span> -->
+                  <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
                 </div><br>
-                <div class="form-group"></div>
-                <label for="mongo_IP">Mongo_ip</label>
-                <input type="Mongo_ip" class="form-control " id="Mongo_ip" formControlName="Mongo_ip" placeholder="Enter Mongo_ip" autocomplete="on">
-                <button type="submit" class="button">Save</button>
-                <button type="submit" class="button">Update</button>
-  
+                <div>
+                  <label for="database">Mongo IP</label>
+                  <input type="text" [(ngModel)]="dbIP" name="dbIP" placeholder="DB IP">
+                </div><br>
+                <button type="submit" class="button" >Save</button>
+                <button type="button" class="button" (click)="viewinTable()">View Data</button>
+                <button type="button" class="button" (click)="editMongoForm()">Edit</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 
-  <div *ngIf="showMySQLForm">
-    <div class="container mt-5 mx-auto d-flex justify-content-center align-items-center">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card box" >
-            <div class="card-body">
-              <h2 class="card-title text-center">MySQL Data</h2> 
-              <!-- <form [formGroup]="mongo" (ngSubmit)="mongo()"> -->
-                <form action="(ng submit)">
-                <div class="form-group">
-                  <label for="userId">User Id</label>
-                  <input type="text" class="form-control" id="userId" formControlName="userId" placeholder="Enter Id">
-                  <!-- <span id="error" *ngIf="userId && userId.invalid && userId.touched">*Invalid user id<br /></span> -->
-                </div><br>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control " id="password" formControlName="Password" placeholder="Enter password" autocomplete="on">
-                  <!-- <span id="error" *ngIf="Password && Password.invalid && Password.touched">*add password</span> -->
-                </div><br>
-                <div class="form-group"></div>
-                <label for="mongo_IP">Mysql_ip</label>
-                <input type="Mongo_ip" class="form-control " id="Mongo_ip" formControlName="Mongo_ip" placeholder="Enter Mongo_ip" autocomplete="on">
-                <button type="submit" class="button">Save</button>
-                <button type="submit" class="button">Update</button>
-  
-              </form>
+    
+      <div *ngIf="showMySQLForm">
+        <div class="container mt-5 mx-auto d-flex justify-content-center align-items-center">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card box">
+                <div class="card-body">
+                  <h2 class="card-title text-center">MySQL Data</h2>
+                  <form (ngSubmit)="handleSaveSql()">
+                    <div>
+                      <label for="userId">User Name</label>
+                      <input type="text" [(ngModel)]="username" name="username" placeholder="Username">
+                    </div><br>
+                    <div>
+                      <label for="password">Password</label>
+                      <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
+                    </div><br>
+                    <div>
+                      <label for="mysql_IP">MySQL IP</label>
+                      <input type="text"  [(ngModel)]="dbIP" name="dbIP" placeholder="DB IP/host">
+                    </div><br>
+                    <button type="submit" class="button">Save</button>
+                    <button type="button" class="button" (click)="viewinTable()">View Data</button>
+                    <button type="button" class="button" (click)="editMySQLForm()">Edit</button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  </div>
-  </div>
+
+      <div *ngIf="results.length > 0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Password</th>
+              <th>Host</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of results">
+              <td>{{ row.user }}</td>
+              <td>{{ row.pass }}</td>
+              <td>{{ row.host }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>   
+
+
+
 </div>
 
 

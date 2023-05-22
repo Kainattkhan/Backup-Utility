@@ -40,20 +40,26 @@ export class ViewbackupComponent implements OnInit {
   //HTTP request to either mongo or sql depending on the value of selectedOption
   populateTable() {
     if (this.selectedOption === 'option1') {
-      this.http.get(`http://localhost:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+      //Replace with your own API
+      this.http.get(`http://192.168.1.62:8080/mongo/showBackup/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
         this.filteredData = Object.entries(data).map(([key, value]) => {
           return {
             name: key,
-            contents: value
+            contents: value,
+            //Replace with your own API
+            downloadLink: `http://192.168.1.62:8080/mongo/zip/${key}`
           };
         });
       });
     } else if (this.selectedOption === 'option2') {
-      this.http.get(`http://localhost:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
+      //Replace with your own API
+      this.http.get(`http://192.168.1.62:8080/sql/showBackupFiles/${this.formatDate(new Date(this.selectedDate))}`).subscribe((data: any) => {
         this.filteredData = Object.entries(data).map(([key, value]) => {
           return {
             name: key,
-            contents: value
+            contents: value,
+            //Replace with your own API
+            downloadLink: `http://192.168.1.62:8080/sql/createzip/${key}`
           };
         });
       });

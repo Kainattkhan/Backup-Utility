@@ -36,7 +36,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th><input type="checkbox" (change)="selectAll()"></th>
+            <th></th>
             <th>File Name</th>
             <th>Content</th>
             <th>Download</th>
@@ -55,6 +55,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="toast-container"></div>
       <span class="button" *ngIf="selectedOption" (click)="restoreData()">Restore</span>
     </div>
   </div>

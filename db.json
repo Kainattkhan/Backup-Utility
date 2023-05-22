@@ -7,22 +7,16 @@
       "id": 11
     },
     {
-      "userId": "987654",
-      "Password": "susaan",
+      "userId": "masood",
+      "Password": "12345",
       "confirmPassword": "susaan",
       "id": 12
     },
     {
-      "userId": "456456",
-      "Password": "asdfgh",
+      "userId": "user2",
+      "Password": "starr",
       "confirmPassword": "asdfgh",
       "id": 13
-    },
-    {
-      "userId": "11111",
-      "Password": "russia",
-      "confirmPassword": "russia",
-      "id": 14
     },
     {
       "userId": "22222",
@@ -31,16 +25,10 @@
       "id": 15
     },
     {
-      "userId": "1234",
-      "Password": "asdfghjk",
+      "userId": "12345",
+      "Password": "falafal",
       "confirmPassword": "asdfghjk",
       "id": 19
-    },
-    {
-      "userId": "01",
-      "Password": "sssss",
-      "confirmPassword": "sssss",
-      "id": 20
     }
-  ]
-}
+  
+]}

@@ -14,6 +14,7 @@ export class TakebackupComponent implements OnInit {
   results: any;
   dropdownData:string[];
   dataBackup:any;
+  backupInProgress: boolean;
 
   constructor(private http: HttpClient) {
     this.selectedOptions = [];
@@ -41,31 +42,37 @@ export class TakebackupComponent implements OnInit {
 
   //it loads databases from specific servers
   showResults() {
+    
     let val;
     if(this.selectedOption==="option1"){
       val="mongo/backup";    
     } else{
       val="sql/getbackup";
     }
-    this.http.get(`http://localhost:8080/${val}/${this.selectedOptions}`).subscribe((data) => {
+    this.backupInProgress = true;
+    //Replace with your own API
+    this.http.get(`http://192.168.1.62:8080/${val}/${this.selectedOptions}`).subscribe((data) => {
       if (data) {   
         this.dataBackup = data;
         this.results = this.dataBackup.map((dropdownData: any) => {
           return {
             option: this.selectedOption === "option1"?dropdownData.Database:dropdownData.database,
             result: dropdownData.Date,
-            downloadLink: this.selectedOption === "option1"?`http://localhost:8080/mongo/zip/${dropdownData.Date}/${dropdownData.Database}`:`http://localhost:8080/sql/createzip/${dropdownData.Date}`
+            downloadLink: this.selectedOption === "option1"?`http://192.168.1.62:8080/mongo/zip/${dropdownData.Date}`:`http://192.168.1.58:8080/sql/createzip/${dropdownData.Date}`
           }
         });
       }
+      this.backupInProgress = false;
     });
+
   }
 
   getDataFromBackendsql(option: string) {
     this.results  = [];
     this.dropdownData = [];
     this.selectedOption = option;
-    this.http.get('http://localhost:8080/sql/alldatabases').subscribe((data) => {
+    //Replace with your own API
+    this.http.get('http://192.168.1.62:8080/sql/alldatabases').subscribe((data) => {
       if (data) {      
          this.dropdownData = Object.values(data);
          console.log(this.dropdownData)
@@ -77,7 +84,8 @@ export class TakebackupComponent implements OnInit {
     this.results  = [];
     this.selectedOption = option;
     this.dropdownData = [];
-    this.http.get('http://localhost:8080/mongo/showAll').subscribe((data) => {
+    //Replace with your own API
+    this.http.get('http://192.168.1.62:8080/mongo/showAll').subscribe((data) => {
       if (data) {
         this.dropdownData = Object.values(data);
       }

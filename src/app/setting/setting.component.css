@@ -3,31 +3,27 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: url('./setting3.PNG');
   background-size: cover;
   background-position: center center;
   opacity: 1;
-  /* display: flex; */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  overflow: auto;
 } 
   .card {
     align-items: center; 
     box-shadow: 5px 5px 5px #507998;
-    padding: 20px;
-    font-family: sans-serif;
-    background: rgb(188, 104, 104);
-    border: rgb(221, 221, 235);
+    font-family: 'Times New Roman';
     width: 400px;
-    top: 10px;
+    font-size: 20px;
+    background: #01061b;
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: center; 
   }
   .card form {
-    padding: 10px;
+    
     width: 120%;
   }
 
@@ -39,7 +35,7 @@
   .card input {
     font-size: 16px;
     padding: 10px;
-    width: 100%;
+    width: 80%;
   }
   
   a {
@@ -55,7 +51,7 @@
   }
   
    .button {
-    border: none;
+    border: 4px solid rgb(19, 20, 21);
     color: white;
     padding: 16px 32px;
     text-align: center;
@@ -66,7 +62,23 @@
     cursor: pointer;
     background-color: #3e5285; 
     color: rgb(253, 251, 251); 
-    border: 2px solid #008CBA;
+    
+  }
+
+    
+  .button1 {
+  
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 40px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #3e5285; 
+    color: rgb(253, 251, 251); 
+    
   }
 
   li {
@@ -74,7 +86,7 @@
   }
 
   .button:hover {
-    background-color: #008CBA;
+    background-color: #022e3d;
     color: white;
   }
   
@@ -82,16 +94,6 @@
     color: red;
   }
   
-  .box {
-    align-content: center;
-    padding:5px;
-    font-family: 'Times New Roman';
-    font-size: 20px;
-    background: #01061b;
-    border: none;
-    border-radius: none;
-  }
-
   ul {
     list-style: none;
     padding: 0;
@@ -101,4 +103,27 @@
     margin-bottom: 20px;
   }
   
- 
+  .data-table {
+    width: 30%;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: aliceblue;
+  }
+
+  .data-table th {
+    background-color: #616883;
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background-color: #c6bfe9;
+  }
